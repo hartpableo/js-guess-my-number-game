@@ -26,6 +26,16 @@ body {
     transform: translateX(-50%);
     width: 100vw;
     font-size: 1.5rem;
+    color: #fff;
+    font-weight: bold;
+}
+
+#notice[data-correct="true"] {
+    background-color: rgb(114, 184, 9);
+}
+
+#notice[data-correct="false"] {
+    background-color: rgb(112, 0, 23);
 }
 
 .tries-wrapper {
