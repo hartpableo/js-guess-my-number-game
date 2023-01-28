@@ -1,5 +1,4 @@
 // Declare variables
-const inProgress = true
 const body = document.querySelector('body')
 const notice = document.getElementById('notice')
 const numberInput = document.getElementById('number')
@@ -11,11 +10,11 @@ let hiddenNumber
 let guessedNumber
 let isCorrect
 
+// Welcome message
+( confirm('Hi there and welcome to this mini-project: "Guess-My-Number" game! 🥳 Do you want to start?  -  Hart') == false ) && byeMessage()
+
 // Window onload
 window.onload = event => {
-
-    // Project in progress... notice
-    // ( inProgress == true ) ? alert('This mini-project is still ongoing... not complete yet! 😄') : null
 
     // Empty guess input field
     numberInput.value = ''
@@ -70,7 +69,7 @@ function displayClue() {
     const higherMargin = hiddenNumber + range2
     clue.textContent = `${ lowerMargin - 1 } to ${ higherMargin + 1 }`
     
-    console.log(`between ${ hiddenNumber - range1 } & ${ hiddenNumber + range2 } | hidden number is ${hiddenNumber}`)
+    // console.log(`between ${ hiddenNumber - range1 } & ${ hiddenNumber + range2 } | hidden number is ${hiddenNumber}`)
 }
 
 // Win or Lose announcement
@@ -93,13 +92,23 @@ function winOrLoseAnnouncement() {
 // Handle result
 function handleResult() {
 
+    submitGuess.setAttribute( 'disabled', '' )
+
     if ( isCorrect ) {
 
         hiddenNumberBox.innerHTML = `<div class="text-green">${hiddenNumber}</div>`
         
         setTimeout(() => {
-            ( confirm('Congratulations! You won! 🥳 Want to try again?') ) && location.reload()
-        }, 2500);
+
+            if ( confirm('Congratulations! You won! 🥳 Want to try again?') ) {
+                location.reload()
+            } else {
+                byeMessage()
+            }
+
+            submitGuess.removeAttribute('disabled')
+
+        }, 2500)
 
     } else {
 
@@ -110,7 +119,8 @@ function handleResult() {
             notice.style.display = 'none'
             notice.setAttribute( 'aria-hidden', 'true' );
             ( notice.hasAttribute('data-correct') ) && notice.removeAttribute( 'data-correct' )
-        }, 2500);
+            submitGuess.removeAttribute('disabled')
+        }, 2500)
 
         reduceTries()
 
@@ -122,5 +132,29 @@ function handleResult() {
 function reduceTries() {
     const howManyTries = parseInt( numberOfTries.textContent )
     numberOfTries.textContent = howManyTries - 1;
-    ( numberOfTries.textContent == 0 ) && alert(`You lost! 😥 You have finished all your 5 tries. The hidden number is: ${hiddenNumber}. Better luck next time! 💪`)
+    if ( numberOfTries.textContent == 0 ) {
+        if ( confirm(`You lost! 😥 You have finished all your 5 tries. The hidden number is: ${hiddenNumber}. Do you want to try again? 💪`) ) {
+            location.reload()
+        } else {
+            byeMessage()
+        }
+    }
+}
+
+// Message before leaving
+function byeMessage() {
+    const html = `
+    <div class="container text-center">
+        <h1 class="fw-bolder">Guess My Number!</h1>
+        <h2 id="exit-message">Thanks for stopping by! 👋</h2>
+        <div class="w-100 d-flex justify-content-end"><small>- Hart Pableo</small></div>
+    </div>
+    `
+
+    body.classList.add( 'd-flex', 'flex-column', 'justify-content-center', 'align-items-center' )
+    body.innerHTML = html
+
+    setTimeout(() => {
+        window.close()
+    }, 3000)
 }

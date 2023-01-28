@@ -9,6 +9,7 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 
 body {
@@ -25,6 +26,14 @@ body {
 
 .text-green {
     color: rgb(9, 158, 9);
+}
+
+.w-100 {
+    width: 100%;
+}
+
+#exit-message {
+    margin: .65em auto;
 }
 
 #notice {
