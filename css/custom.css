@@ -19,6 +19,14 @@ body {
     background-color: rgb(241, 248, 253);
 }
 
+.text-red {
+    color: rgb(194, 8, 8);
+}
+
+.text-green {
+    color: rgb(9, 158, 9);
+}
+
 #notice {
     top: 0;
     z-index: 1;

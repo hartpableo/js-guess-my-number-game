@@ -5,14 +5,20 @@ const notice = document.getElementById('notice')
 const numberInput = document.getElementById('number')
 const submitGuess = document.getElementById('guess')
 const clue = document.getElementById('clue')
+const hiddenNumberBox = document.getElementById('hidden-number')
+const numberOfTries = document.getElementById('tries')
 let hiddenNumber
 let guessedNumber
 let isCorrect
 
+// Window onload
 window.onload = event => {
 
     // Project in progress... notice
     // ( inProgress == true ) ? alert('This mini-project is still ongoing... not complete yet! 😄') : null
+
+    // Empty guess input field
+    numberInput.value = ''
 
     // Generate a random number from 1000 and below
     hiddenNumber = Math.floor(Math.random() * 1001)
@@ -35,7 +41,7 @@ const isEqual = ( val ) => {
 
 }
 
-// Number input
+// When guess is submitted
 submitGuess.addEventListener('click', e => {
     
     e.preventDefault()
@@ -46,6 +52,9 @@ submitGuess.addEventListener('click', e => {
 
     // Announcement
     winOrLoseAnnouncement()
+
+    // More result handlers
+    handleResult()
 
 })
 
@@ -79,4 +88,39 @@ function winOrLoseAnnouncement() {
         notice.dataset.correct = 'false'
     }
 
+}
+
+// Handle result
+function handleResult() {
+
+    if ( isCorrect ) {
+
+        hiddenNumberBox.innerHTML = `<div class="text-green">${hiddenNumber}</div>`
+        
+        setTimeout(() => {
+            ( confirm('Congratulations! You won! 🥳 Want to try again?') ) && location.reload()
+        }, 2500);
+
+    } else {
+
+        hiddenNumberBox.innerHTML = '<div class="text-red">X</div>'
+
+        setTimeout(() => {
+            hiddenNumberBox.innerHTML = `?`
+            notice.style.display = 'none'
+            notice.setAttribute( 'aria-hidden', 'true' );
+            ( notice.hasAttribute('data-correct') ) && notice.removeAttribute( 'data-correct' )
+        }, 2500);
+
+        reduceTries()
+
+    }
+
+}
+
+// Reduce tries after every mistake
+function reduceTries() {
+    const howManyTries = parseInt( numberOfTries.textContent )
+    numberOfTries.textContent = howManyTries - 1;
+    ( numberOfTries.textContent == 0 ) && alert(`You lost! 😥 You have finished all your 5 tries. The hidden number is: ${hiddenNumber}. Better luck next time! 💪`)
 }
