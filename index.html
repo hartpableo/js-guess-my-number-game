@@ -8,33 +8,37 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/custom.css">
 </head>
-<body class="position-relative d-flex flex-column justify-content-start align-items-center">
+<body class="position-relative">
     <header role="banner">
         <div id="notice" class="text-center p-2 position-absolute" aria-hidden="true" style="display: none;"></div>
         <div class="container text-center">
-            <h1 class="fw-bolder m-0">Guess My Number!</h1>
+            <div class="row">
+                <div class="col-12">
+                    <h1 class="fw-bolder m-0">Guess My Number!</h1>
+                    <div class="tries-wrapper text-center">Tries: <span id="tries">5</span></div>
+                </div>
+            </div>
         </div>
     </header>
     <main role="main">
         <div class="container">
-            <section>
-                <div class="tries-wrapper text-center">Tries: <span id="tries">5</span></div>
-                <div id="hidden-number" class="mx-auto d-flex flex-column justify-content-center align-items-center fw-bolder">?</div>
+            <section class="row">
+                <div class="col-6 justify-content-center align-items-center d-flex flex-column order-1">
+                    <div id="hidden-number" class="d-flex flex-column justify-content-center align-items-center fw-bolder">?</div>
+                </div>
+                <div class="col-6 justify-content-center align-items-end d-flex flex-column">
+                    <form action="#" method="post" class="guess-input d-flex flex-column justify-content-center align-items-center align-items-md-stretch">
+                        <input type="number" name="number" id="number" class="text-center fw-bold" placeholder="0">
+                        <button id="guess" type="submit" class="btn btn-primary fw-bold">Guess!</button>
+                    </form>
+                </div>
             </section>
             <section id="game-details" class="container">
                 <div class="row">
-                    <div class="col-md-6 justify-content-center align-items-center d-flex flex-column">
-                        <form action="#" method="post" class="guess-input d-flex flex-md-column justify-content-center align-items-center align-items-md-stretch">
-                            <input type="number" name="number" id="number" class="text-center fw-bold" placeholder="0">
-                            <button id="guess" type="submit" class="btn btn-primary fw-bold">Guess!</button>
-                        </form>
-                    </div>
-                    <div class="col-md-6 justify-content-center align-items-center d-flex flex-column">
+                    <div class="col-12 text-center justify-content-center align-items-center d-flex flex-column">
                         <div class="d-flex flex-column justify-content-start align-items-stretch" aria-label="Game information">
                             <div class="game-details-item"><strong>Clue:</strong> number is between <span id="clue">0 - 25</span></div>
                             <div class="game-details-item"><strong>Additional Clue:</strong> <span id="additional-clue">(guess a number first)</span></div>
-                            <!-- <div class="game-details-item"><strong>My score:</strong> <span id="score">0</span></div>
-                            <div class="game-details-item"><strong>Highest score:</strong> <span id="highest-score">0</span></div> -->
                         </div>
                     </div>
                 </div>
@@ -43,7 +47,11 @@
     </main>
     <footer role="contentinfo">
         <div class="container">
-            <p>Sound effects from <a href="https://pixabay.com/sound-effects/" target="_blank" rel="nofollow noreferrer">Pixabay</a>.</p>
+            <div class="row">
+                <div class="col-12">
+                    <p>Sound effects from <a href="https://pixabay.com/sound-effects/" target="_blank" rel="nofollow noreferrer">Pixabay</a>.</p>
+                </div>
+            </div>
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
