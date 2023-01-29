@@ -6,6 +6,7 @@ const submitGuess = document.getElementById('guess')
 const clue = document.getElementById('clue')
 const hiddenNumberBox = document.getElementById('hidden-number')
 const numberOfTries = document.getElementById('tries')
+const additionalClue = document.getElementById('additional-clue')
 let hiddenNumber
 let guessedNumber
 let isCorrect
@@ -54,6 +55,9 @@ submitGuess.addEventListener('click', e => {
 
     // More result handlers
     handleResult()
+
+    // Additonal Clue
+    handleAdditionalClue()
 
 })
 
@@ -157,4 +161,15 @@ function byeMessage() {
     setTimeout(() => {
         window.close()
     }, 3000)
+}
+
+// Additional Clue (Higher or Lower)
+function handleAdditionalClue() {
+    if ( guessedNumber < hiddenNumber ) {
+        additionalClue.textContent = 'Go Higher!'
+    } else if ( guessedNumber > hiddenNumber ) {
+        additionalClue.textContent = 'Go Lower!'
+    } else {
+        additionalClue.textContent = 'You got it!'
+    }
 }
