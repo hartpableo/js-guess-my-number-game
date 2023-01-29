@@ -14,10 +14,17 @@ input[type=number] {
 
 body {
     font-family: 'Roboto Mono', monospace;
-    min-height: 100vh;
-    padding: 4.6rem 2rem 2rem;
+    height: 100vh;
+    padding: 25px .5rem 0;
     overflow-x: hidden;
     background-color: rgb(241, 248, 253);
+    row-gap: 25px;
+}
+
+header,
+main,
+footer {
+    width: 100%;
 }
 
 .text-red {
@@ -60,24 +67,26 @@ body {
 }
 
 #hidden-number {
-    width: 200px;
-    height: 200px;
+    width: 140px;
+    height: 140px;
     border: 2px solid rgba(0,0,0,.5);
     background-color: antiquewhite;
-    margin-top: 45px;
-    font-size: 5rem;
+    font-size: 3.1rem;
     padding: .25em;
+    margin-top: 15px;
 }
 
 .guess-input {
-    max-width: 200px;
+    /* max-width: 140px; */
     gap: .5rem;
+    margin-bottom: 25px;
 }
 
 #number {
     padding: .2em;
-    height: 150px;
-    font-size: 3.5rem;
+    height: 140px;
+    width: 140px;
+    font-size: 3.1rem;
     background-color: #fff;
     border: 2px solid #ccc;
 }
@@ -88,7 +97,11 @@ body {
 }
 
 #game-details {
-    margin-top: 5rem;
+    margin-top: .6rem;
+}
+
+[aria-label="Game information"] {
+    row-gap: 5px;
 }
 
 .game-details-item {
@@ -97,4 +110,55 @@ body {
 
 .game-details-item strong {
     font-size: 1.3em;
+    display: block;
+}
+
+footer {
+    font-size: 14px;
+    padding: 25px 0;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+}
+
+@media (min-width: 768px) {
+
+    body {
+        padding: 4.6rem 2rem 0;
+        height: auto;
+        min-height: 100vh;
+        row-gap: unset;
+    }
+
+    .tries-wrapper {
+        margin-top: 15px;
+    }
+
+    #hidden-number {
+        margin-top: 45px;
+        font-size: 5rem;
+        width: 200px;
+        height: 200px;
+    }
+
+    .guess-input {
+        max-width: 200px;
+        margin-bottom: unset;
+    }
+
+    #number {
+        font-size: 3.5rem;
+        height: 150px;
+        width: 100%;
+    }
+
+    #game-details {
+        margin-top: 5rem;
+    }
+
+    .game-details-item strong {
+        display: inline;
+    }
+
 }

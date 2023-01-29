@@ -11,7 +11,16 @@ let hiddenNumber
 let guessedNumber
 let isCorrect
 
+// Sounds
+let winSound = new Audio('./audio/success-fanfare-trumpets-6185.mp3');
+let loseSound = new Audio('./audio/080047_lose_funny_retro_video-game-80925.mp3');
+let lostTrySound = new Audio('./audio/failure-drum-sound-effect-2-7184.mp3');
+let entrySound = new Audio('./audio/happy-logo-version-2-13399.mp3');
+let exitSound = new Audio('./audio/warm-tech-logo-21474.mp3');
+
 // Welcome message
+entrySound.playbackRate = 1.3
+entrySound.play();
 ( confirm('Hi there and welcome to this mini-project: "Guess-My-Number" game! 🥳 Do you want to start?  -  Hart') == false ) && byeMessage()
 
 // Window onload
@@ -73,7 +82,7 @@ function displayClue() {
     const higherMargin = hiddenNumber + range2
     clue.textContent = `${ lowerMargin - 1 } to ${ higherMargin + 1 }`
     
-    // console.log(`between ${ hiddenNumber - range1 } & ${ hiddenNumber + range2 } | hidden number is ${hiddenNumber}`)
+    console.log(`between ${ hiddenNumber - range1 } & ${ hiddenNumber + range2 } | hidden number is ${hiddenNumber}`)
 }
 
 // Win or Lose announcement
@@ -87,6 +96,7 @@ function winOrLoseAnnouncement() {
         notice.textContent = `You got it right! 👏`
         notice.dataset.correct = 'true'
     } else {
+        lostTrySound.play()
         notice.textContent = `You did not get it right! Try again! ❌`
         notice.dataset.correct = 'false'
     }
@@ -100,6 +110,7 @@ function handleResult() {
 
     if ( isCorrect ) {
 
+        winSound.play()
         hiddenNumberBox.innerHTML = `<div class="text-green">${hiddenNumber}</div>`
         
         setTimeout(() => {
@@ -137,6 +148,7 @@ function reduceTries() {
     const howManyTries = parseInt( numberOfTries.textContent )
     numberOfTries.textContent = howManyTries - 1;
     if ( numberOfTries.textContent == 0 ) {
+        loseSound.play()
         if ( confirm(`You lost! 😥 You have finished all your 5 tries. The hidden number is: ${hiddenNumber}. Do you want to try again? 💪`) ) {
             location.reload()
         } else {
@@ -147,6 +159,8 @@ function reduceTries() {
 
 // Message before leaving
 function byeMessage() {
+    exitSound.playbackRate = 1.25
+    exitSound.play();
     const html = `
     <div class="container text-center">
         <h1 class="fw-bolder">Guess My Number!</h1>
@@ -154,13 +168,8 @@ function byeMessage() {
         <div class="w-100 d-flex justify-content-end"><small>- Hart Pableo</small></div>
     </div>
     `
-
-    body.classList.add( 'd-flex', 'flex-column', 'justify-content-center', 'align-items-center' )
+    body.setAttribute( 'class', 'd-flex flex-column justify-content-center align-items-center' )
     body.innerHTML = html
-
-    setTimeout(() => {
-        window.close()
-    }, 3000)
 }
 
 // Additional Clue (Higher or Lower)
