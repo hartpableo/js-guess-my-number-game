@@ -47,6 +47,10 @@ main {
     margin: .65em auto;
 }
 
+.modal {
+    background-color: rgba( 0, 0, 0, .75 );
+}
+
 #notice {
     top: 0;
     z-index: 1;

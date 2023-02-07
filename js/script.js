@@ -7,6 +7,7 @@ const clue = document.getElementById('clue')
 const hiddenNumberBox = document.getElementById('hidden-number')
 const numberOfTries = document.getElementById('tries')
 const additionalClue = document.getElementById('additional-clue')
+const welcomeModal = document.getElementById('welcome-modal')
 let hiddenNumber
 let guessedNumber
 let isCorrect
@@ -21,7 +22,8 @@ let exitSound = new Audio('./audio/warm-tech-logo-21474.mp3');
 // Welcome message
 entrySound.playbackRate = 1.3
 entrySound.play();
-( confirm('Hi there and welcome to this mini-project: "Guess-My-Number" game! 🥳 Do you want to start?  -  Hart') == false ) && byeMessage()
+// ( confirm('Hi there and welcome to this mini-project: "Guess-My-Number" game! 🥳 Do you want to start?  -  Hart') == false ) && byeMessage()
+welcomeModal.modal('show')
 
 // Window onload
 window.onload = event => {
